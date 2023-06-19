@@ -1,7 +1,7 @@
 def containerName="finance-me"
 def tag="latest"
 def dockerHubUser="sejalmm06"
-def httpPort="8081"
+def httpPort="8084"
 
 node {
 
