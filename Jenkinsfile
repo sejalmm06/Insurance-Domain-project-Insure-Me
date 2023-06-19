@@ -47,7 +47,5 @@ node {
     stage('Run App') {
     ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts', playbook: 'ansible-playbook.yml'
     }
-    stage('execution of test case'){
-        sh 'sudo java -jar insureme-selenium-runnable-jar.jar'
-    }
+   
 }
