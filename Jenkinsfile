@@ -25,16 +25,13 @@ node {
             useWrapperFileDirectly: true
         ])
     }
-
     stage("Image Prune"){
          sh "docker image prune -a -f"
     }
-
     stage('Image Build'){
         sh "docker build -t $containerName:$tag --no-cache ."
         echo "Image build complete"
     }
-
     stage('Push to Docker Registry'){
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
             sh "docker login -u $dockerUser -p $dockerPassword"
@@ -43,15 +40,11 @@ node {
             echo "Image push complete"
      }
     }
-
     stage('Run App') {
     ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts', playbook: 'ansible-playbook.yml'
             }
-
     stage('Selenium Test') {
         sleep(time: 60, unit: 'SECONDS') 
         sh 'sudo java -jar insureme-selenium-runnable-jar.jar'
-
     }
-   
 }
