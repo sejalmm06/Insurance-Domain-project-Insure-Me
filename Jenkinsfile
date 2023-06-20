@@ -8,7 +8,7 @@ node {
         checkout scm
     }
     stage('Build'){
-        sh "mvn clean install"
+        sh "mvn clean package"
     }
     stage('Publish Test Reports') {
         publishHTML([
