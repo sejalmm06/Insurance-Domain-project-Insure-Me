@@ -4,15 +4,12 @@ def dockerHubUser="sejalmm06"
 def httpPort="8084"
 
 node {
-
     stage('Checkout') {
         checkout scm
     }
-
     stage('Build'){
         sh "mvn clean install"
     }
-    
     stage('Publish Test Reports') {
         publishHTML([
             allowMissing: false,
