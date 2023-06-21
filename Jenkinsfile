@@ -15,9 +15,9 @@ node {
         allowMissing: false,
         alwaysLinkToLastBuild: false,
         keepAll: false,
-        reportDir: 'target/site',
-        reportFiles: 'surefire-report.html',
-        reportName: 'Surefire Report',
+        reportDir: '/var/lib/jenkins/workspace/Insure-Me/target/surefire-reports',
+        reportFiles: 'index.html',
+        reportName: 'HTML Report',
         reportTitles: '',
         useWrapperFileDirectly: true
         ])
