@@ -30,7 +30,10 @@ node {
         echo "Image build complete"
     }
     stage('Push to Docker Registry'){
-        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
+        withCredentials([
+            usernamePassword(credentialsId: 'dockerHubAccount',
+                             usernameVariable: 'dockerUser', 
+                             passwordVariable: 'dockerPassword')]) {
             sh "docker login -u $dockerUser -p $dockerPassword"
             sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
             sh "docker push $dockerUser/$containerName:$tag"
@@ -38,7 +41,9 @@ node {
      }
     }
     stage('Run App') {
-    ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts', playbook: 'ansible-playbook.yml'
+    ansiblePlaybook credentialsId: 'private-key', 
+        disableHostKeyChecking: true, installation: 'ansible', 
+        inventory: 'hosts', playbook: 'ansible-playbook.yml'
             }
     stage('Selenium Test') {
         sleep(time: 60, unit: 'SECONDS') 
